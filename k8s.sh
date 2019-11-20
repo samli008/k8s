@@ -53,3 +53,12 @@ docker rmi 192.168.6.121:4000/flannel:v0.10.0-amd64
 #kubectl create serviceaccount dashboard-admin -n kube-system
 #kubectl create clusterrolebinding dashboard-admin --clusterrole=cluster-admin --serviceaccount=kube-system:dashboard-admin
 #kubectl describe secrets -n kube-system $(kubectl -n kube-system get secret | awk '/dashboard-admin/{print $1}')
+
+# delete node on k8s master
+kubectl drain k3 --delete-local-data --force --ignore-daemonsets
+kubectl delete node k3
+# on k3 node
+kubeadm reset
+
+# set node role
+kubectl label node k3 node-role.kubernetes.io/worker=
