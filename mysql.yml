@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment  # 类型是部署
+metadata:
+  name: mysql 
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  strategy:
+    type: Recreate
+  template: 
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - image: mysql:latest
+          name: mysql
+          imagePullPolicy: Never
+          env: 
+            - name: MYSQL_ROOT_PASSWORD 
+              value: liyang 
+            - name: MYSQL_USER
+              value: liyang
+            - name: MYSQL_PASSWORD
+              value: liyang
+          args: ["--default-authentication-plugin=mysql_native_password"]
+          ports:
+            - containerPort: 3306 # mysql
+          volumeMounts:
+            - name: mysql-volume
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-volume
+          hostPath:
+            path: /mfs/mysql
+            type: Directory
