@@ -42,9 +42,9 @@ spec:
           - name: GUACD_PORT
             value: "4822"
           - name: MYSQL_HOSTNAME
-            value: "192.168.20.21"
+            value: "mysql-service"
           - name: MYSQL_PORT
-            value: "30306"
+            value: "3306"
           - name: MYSQL_DATABASE
             value: "guacamole_db"
           - name: MYSQL_USER
