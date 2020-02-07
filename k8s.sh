@@ -36,7 +36,8 @@ docker pull 192.168.6.121:4000/flannel:v0.10.0-amd64
 docker tag 192.168.6.121:4000/flannel:v0.10.0-amd64  k8s.gcr.io/flannel:v0.10.0-amd64
 docker rmi 192.168.6.121:4000/flannel:v0.10.0-amd64
 
-#kubeadm init --kubernetes-version=v1.15.0 --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/12 --ignore-preflight-errors=Swap
+# create k8s cluster master
+kubeadm init --kubernetes-version=v1.15.0 --pod-network-cidr=10.244.0.0/16
 
 #export KUBECONFIG=/etc/kubernetes/admin.conf
 #kubectl apply -f /root/kube-flannel.yml
@@ -49,10 +50,11 @@ docker rmi 192.168.6.121:4000/flannel:v0.10.0-amd64
 #kubeadm token list
 #kubeadm join node1:6443 --token yv2ov9.f0h4fuzvi9thcphu --discovery-token-unsafe-skip-ca-verification
 
-#kubectl apply -f kubernetes-dashboard.yaml
-#kubectl create serviceaccount dashboard-admin -n kube-system
-#kubectl create clusterrolebinding dashboard-admin --clusterrole=cluster-admin --serviceaccount=kube-system:dashboard-admin
-#kubectl describe secrets -n kube-system $(kubectl -n kube-system get secret | awk '/dashboard-admin/{print $1}')
+# deploy dashboard
+kubectl apply -f kubernetes-dashboard.yaml 
+kubectl apply -f admin-role.yaml
+kubectl apply -f kubernetes-dashboard-admin.rbac.yaml 
+kubectl -n kube-system get svc
 
 # delete node on k8s master
 kubectl drain k3 --delete-local-data --force --ignore-daemonsets
