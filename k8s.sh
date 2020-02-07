@@ -15,6 +15,7 @@ KUBELET_EXTRA_ARGS="--fail-swap-on=false"
 EOF
 
 swapoff -a
+vi /etc/fstab   #swap line
 
 cat >> /etc/sysctl.d/k8s.conf << EOF
 net.bridge.bridge-nf-call-ip6tables = 1
