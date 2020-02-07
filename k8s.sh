@@ -60,3 +60,10 @@ kubectl get node -o wide
 # deploy application
 kubectl apply -f nginx.yml
 kubectl apply -f nginx-service.yml
+
+kubectl get deployment
+kubectl get pod
+kubectl get svc
+kubectl describe deployment mysql
+kubectl describe pod guacamole-679994ccbb-wnvd4
+kubectl describe svc nginx 
