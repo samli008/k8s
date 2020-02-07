@@ -52,5 +52,7 @@ kubeadm reset
 # set node role
 kubectl label node k3 node-role.kubernetes.io/worker=
 kubectl get node -o wide
+
+# deploy application
 kubectl apply -f nginx.yml
 kubectl apply -f nginx-service.yml
