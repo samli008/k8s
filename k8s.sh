@@ -26,7 +26,9 @@ sysctl --system
 # deploy master node
 kubeadm init --kubernetes-version=v1.15.0 --pod-network-cidr=10.244.0.0/16
 
-export KUBECONFIG=/etc/kubernetes/admin.conf
+echo "export KUBECONFIG=/etc/kubernetes/admin.conf" >> /etc/profile
+source /etc/profile
+
 kubectl apply -f /root/kube-flannel.yml
 
 journalctl -f -u kubelet
