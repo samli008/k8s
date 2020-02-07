@@ -23,19 +23,20 @@ EOF
 sysctl --system
 
 
-# create k8s cluster master
+# deploy master node
 kubeadm init --kubernetes-version=v1.15.0 --pod-network-cidr=10.244.0.0/16
 
-#export KUBECONFIG=/etc/kubernetes/admin.conf
-#kubectl apply -f /root/kube-flannel.yml
+export KUBECONFIG=/etc/kubernetes/admin.conf
+kubectl apply -f /root/kube-flannel.yml
 
-#journalctl -f -u kubelet
-#kubectl get pods --all-namespaces
-#kubectl get cs
-#kubectl get node
+journalctl -f -u kubelet
+kubectl get pods --all-namespaces
+kubectl get cs
+kubectl get node
 
-#kubeadm token list
-#kubeadm join node1:6443 --token yv2ov9.f0h4fuzvi9thcphu --discovery-token-unsafe-skip-ca-verification
+# deploy work node
+kubeadm token list
+kubeadm join master1:6443 --token yv2ov9.f0h4fuzvi9thcphu --discovery-token-unsafe-skip-ca-verification
 
 # deploy dashboard
 kubectl apply -f kubernetes-dashboard.yaml 
