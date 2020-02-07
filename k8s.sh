@@ -1,11 +1,13 @@
-rm -rf /etc/yum.repos.d/*
-mv *.repo /etc/yum.repos.d/
+# on all nodes install docker and local docker registry2
 yum -y install docker kubelet kubeadm kubectl
 sed -i '/ExecStart/a\--insecure-registry 192.168.6.121:4000 \\' /usr/lib/systemd/system/docker.service
 systemctl enable docker
 systemctl start docker
 systemctl enable kubelet
 systemctl start kubelet
+
+docker load < registry2.tar
+docker run -d -v /root/registry:/var/lib/registry --name k8s_registry --restart always -p 4000:5000 registry:2
 
 cat > /etc/sysconfig/kubelet << EOF
 KUBELET_EXTRA_ARGS="--fail-swap-on=false"
@@ -19,22 +21,6 @@ net.bridge.bridge-nf-call-iptables = 1
 EOF
 sysctl --system
 
-images=(kube-apiserver:v1.15.0 kube-controller-manager:v1.15.0 kube-scheduler:v1.15.0 kube-proxy:v1.15.0 pause:3.1 etcd:3.3.10 kubernetes-dashboard-amd64:v1.10.1 flannel:v0.11.0-amd64 )
-
-for imageName in ${images[@]} ; do
-
-  docker pull 192.168.6.121:4000/$imageName
-  docker tag 192.168.6.121:4000/$imageName k8s.gcr.io/$imageName
-  docker rmi 192.168.6.121:4000/$imageName
-done
-
-docker pull 192.168.6.121:4000/coredns:1.3.1
-docker tag 192.168.6.121:4000/coredns:1.3.1  k8s.gcr.io/coredns:1.3.1
-docker rmi 192.168.6.121:4000/coredns:1.3.1
-
-docker pull 192.168.6.121:4000/flannel:v0.10.0-amd64
-docker tag 192.168.6.121:4000/flannel:v0.10.0-amd64  k8s.gcr.io/flannel:v0.10.0-amd64
-docker rmi 192.168.6.121:4000/flannel:v0.10.0-amd64
 
 # create k8s cluster master
 kubeadm init --kubernetes-version=v1.15.0 --pod-network-cidr=10.244.0.0/16
