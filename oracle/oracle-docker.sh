@@ -23,4 +23,4 @@ password: oracle
 
 # oracle client with sqlplus
 sqlplus system/oracle@//192.168.8.24:1521/EE.oracle.docker
-sqlplus system/oracle@//192.168.8.24:32175/EE.oracle.docker
+sqlplus system/oracle@//192.168.8.24:31521/EE.oracle.docker
