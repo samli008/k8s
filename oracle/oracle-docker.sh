@@ -15,7 +15,7 @@ password: oracle
 
 # k8s external link
 hostname: 192.168.8.24
-port: 32175
+port: 31521
 sid: EE
 service name: EE.oracle.docker
 username: system
