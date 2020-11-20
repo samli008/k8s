@@ -10,9 +10,11 @@ spec:
   ports:
   - port: 1521
     targetPort: 1521
+    nodePort: 31521
     name: oracle1521
   - port: 8080
-    targetPort: 8181
+    targetPort: 8080
+    nodePort: 31080
     name: oralce8080
   selector:
     app: oralce
