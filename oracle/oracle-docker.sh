@@ -2,7 +2,7 @@
 docker run -d --name=oracle -p 8181:8080 -p 1521:1521 -v /oracle/data:/u01/app/oracle oracle11g:latest
 
 # deploy oracle11g on k8s
-kubectl create -f oracle11g.yaml --namespace=kube-public
+kubectl apply -f oracle11g.yaml --namespace=kube-public
 kubectl get svc --namespace=kube-public
 
 # k8s internal link
