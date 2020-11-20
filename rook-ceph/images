@@ -1,0 +1,15 @@
+# 各个节点均拉取镜像
+docker pull registry.cn-hangzhou.aliyuncs.com/vinc-auto/ceph:v1.2.6
+docker pull registry.cn-hangzhou.aliyuncs.com/vinc-auto/ceph:v14.2.8
+docker pull registry.cn-hangzhou.aliyuncs.com/vinc-auto/csi-node-driver-registrar:v1.2.0
+docker pull registry.cn-hangzhou.aliyuncs.com/vinc-auto/csi-provisioner:v1.4.0
+docker pull registry.cn-hangzhou.aliyuncs.com/vinc-auto/csi-attacher:v1.2.0
+docker pull registry.cn-hangzhou.aliyuncs.com/vinc-auto/csi-snapshotter:v1.2.2
+docker pull registry.cn-hangzhou.aliyuncs.com/vinc-auto/cephcsi:v1.2.2
+
+# 需要手动将镜像做tag，否则依然会去远端下载
+docker tag registry.cn-hangzhou.aliyuncs.com/vinc-auto/csi-node-driver-registrar:v1.2.0 quay.io/k8scsi/csi-node-driver-registrar:v1.2.0
+docker tag registry.cn-hangzhou.aliyuncs.com/vinc-auto/csi-provisioner:v1.4.0 quay.io/k8scsi/csi-provisioner:v1.4.0
+docker tag registry.cn-hangzhou.aliyuncs.com/vinc-auto/csi-attacher:v1.2.0 quay.io/k8scsi/csi-attacher:v1.2.0
+docker tag registry.cn-hangzhou.aliyuncs.com/vinc-auto/csi-snapshotter:v1.2.2 quay.io/k8scsi/csi-snapshotter:v1.2.2
+docker tag registry.cn-hangzhou.aliyuncs.com/vinc-auto/cephcsi:v1.2.2 quay.io/cephcsi/cephcsi:v1.2.2
