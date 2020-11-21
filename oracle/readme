@@ -7,6 +7,10 @@ docker-compose down
 docker-compse exec oracle bash
 sqlplus sys/oracle as sysdba
 
+kubectl apply -f oracle11g.yaml --namespace=kube-public
+kubectl get svc --namespace=kube-public
+kubectl exec oralce-68b86d5b75-vlhnp -it bash -n kube-public
+
 sqlplus system/oracle@//192.168.8.24:1521/EE.oracle.docker
 sqlplus system/oracle@//192.168.8.24:31521/EE.oracle.docker
 sqlplus sys/oracle@//192.168.8.24:31521/EE.oracle.docker as sysdba
