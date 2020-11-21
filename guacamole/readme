@@ -1,0 +1,5 @@
+# config mysql database
+docker cp initdb.sql mysql:/root/
+docker-compose exec mysql bash
+mysql -u root -pliyang guacamole_db < initdb.sql
+select user,host from mysql.user;

@@ -12,6 +12,9 @@ services:
       - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=liyang
+      - MYSQL_DATABASE=guacamole_db
+      - MYSQL_USER=liyang
+      - MYSQL_PASSWORD=liyang
   guacamole:
     container_name: guacamole
     image: guacamole/guacamole
