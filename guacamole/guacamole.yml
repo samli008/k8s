@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: guacd
-        image:  guacamole/guacd
+        image: guacamole/guacd
         ports:
         - containerPort: 4822
 
