@@ -1,0 +1,56 @@
+# shutdown database on each node
+shutdown immediate
+
+# startup database to mount mode only one node
+startup mount
+alter database archivelog;
+alter database open;
+
+# startup database other node
+startup
+archive log list
+
+# host cp backup tablespace
+alter tablespace liyang01 begin backup;
+host cp /racdb/datafile/liyang01.268.1051922209 /home/oracle/
+alter tablespace liyang01 end backup;
+
+# testing database error and recover database;
+shutdown abort
+rm -f /racdb/datafile/liyang01.268.1051922209
+startup
+select file#,error from v$recover_file;
+host cp /home/oracle/liyang01.268.1051922209 /racdb/datafile/
+recover datafile 6;
+alter database open;
+
+# rman backup database;
+rman target /
+backup database;
+
+run{
+   allocate channel c1 type disk format '/home/oracle/backup/full_%d_%T_%s';
+   backup database include current controlfile;
+   release channel c1;
+}
+
+run{
+   allocate channel c1 type disk format '/home/oracle/backup/tbs_liyang01_%d_%T_%s';
+   backup tablespace liyang01;
+   release channel c1;
+}
+
+# sqlplus / as sysdba
+select file_id,file_name from dba_data_files;
+
+# rman target /
+run{
+   allocate channel c1 type disk format '/home/oracle/backup/datafile_4_6_%d_%T_%s';
+   backup datafile 4,6;
+   release channel c1;
+}
+
+# restore datafile with rman target / and startup mount database
+list backup;
+restore datafile 6;
+alter database open;
