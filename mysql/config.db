@@ -1,0 +1,9 @@
+# config mysql database 
+docker cp initdb.sql mysql:/root/
+docker exec -it mysql /bin/bash
+mysql -u root -pliyang
+create database guacamole_db;
+mysql -u root -pliyang guacamole_db < initdb.sql
+create user 'liyang'@'%' identified by 'liyang';
+grant all on guacamole_db.* to 'liyang'@'%';
+select user,host from mysql.user;
