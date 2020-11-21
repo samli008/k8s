@@ -1,0 +1,16 @@
+- hosts: all
+  remote_user: root
+
+  tasks:
+    - name: copy mole.tar
+      copy: src=/root/mole.tar dest=/root
+    - name: tar mole.tar
+      shell: chdir=/root tar xzf mole.tar
+    - name: load guacamole image 
+      shell: chdir=/root docker load < guacamole.tar
+    - name: load guacd image 
+      shell: chdir=/root docker load < guacd.tar
+    - name: load mysql image 
+      shell: chdir=/root docker load < mysql.tar
+    - name: delete tar
+      shell: chdir=/root rm -f *.tar
