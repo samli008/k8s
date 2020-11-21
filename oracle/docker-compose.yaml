@@ -1,0 +1,11 @@
+version: '2'
+services:
+  oracle:
+    container_name: oracle
+    image: oracle11g
+    restart: always
+    volumes:
+      - /oracle/data:/u01/app/oracle
+    ports:
+      - "1521:1521"
+      - "8181:8080"

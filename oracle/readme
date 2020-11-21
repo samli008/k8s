@@ -1,0 +1,5 @@
+docker run -d --name=oracle -p 8181:8080 -p 1521:1521 -v /oracle/data:/u01/app/oracle oracle11g:latest
+docker-compose up -d
+docker-compose ps
+docker-compose down
+docker-compse exec oracle bash
