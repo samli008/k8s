@@ -1,4 +1,9 @@
 docker run -d --name=oracle -p 8181:8080 -p 1521:1521 -v /oracle/data:/u01/app/oracle oracle11g:latest
+
+sqlplus system/oracle@//192.168.8.24:1521/EE.oracle.docker
+sqlplus system/oracle@//192.168.8.24:31521/EE.oracle.docker
+sqlplus sys/oracle@//192.168.8.24:31521/EE.oracle.docker as sysdba
+
 docker-compose up -d
 docker-compose ps
 docker-compose down
