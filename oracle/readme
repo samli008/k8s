@@ -13,7 +13,7 @@ sqlplus sys/oracle@//192.168.8.24:31521/EE.oracle.docker as sysdba
 
 show user;
 set line 200;
-select instance_name,status,host_name from gv$instance;
+select instance_name,status,host_name from v$instance;
 select name from v$tablespace;
 select name from v$datafile;
 create tablespace liyang01 datafile '/u01/app/oracle/oradata/EE/liyang01.dbf' size 100m;
@@ -26,7 +26,7 @@ temporary tablespace temp
 account unlock;
 
 select * from all_users;
-s
+
 grant dba to liyang;
 
 drop user liyang cascade;
