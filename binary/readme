@@ -14,6 +14,9 @@
 14. kubectl apply -f nginx-service.yaml
 15. kubectl apply -f dashboard.yaml
 
+iptables -P INPUT ACCEPT
+iptables -P FORWARD ACCEPT
+
 etcdctl member list
 kubectl get cs
 kubectl get node
