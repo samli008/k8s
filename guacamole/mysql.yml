@@ -21,6 +21,8 @@ spec:
           env: 
             - name: MYSQL_ROOT_PASSWORD 
               value: liyang 
+            - name: MYSQL_DATABASE
+              value: guacamole_db
             - name: MYSQL_USER
               value: liyang
             - name: MYSQL_PASSWORD
