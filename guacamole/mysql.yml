@@ -36,3 +36,13 @@ spec:
           hostPath:
             path: /mfs/mysql
             type: Directory
+
+---
+          volumeMounts:
+            - name: mysql-volume
+              mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-volume
+        nfs:
+          path: /nfs/mysql
+          server: 192.168.100.11
