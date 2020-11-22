@@ -1,0 +1,27 @@
+# view mysql service cluster ip
+kubectl get svc -o wide
+
+# tomcat connect mysql with cluster ip or dns name
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: myweb
+spec:
+  replicas: 1
+  selector:
+    app: myweb
+  template:
+    metadata:
+      labels:
+        app: myweb
+    spec:
+      containers:
+        - name: myweb
+          image: tomcat:v2
+          ports:
+          - containerPort: 8080
+          env:
+          - name: MYSQL_SERVICE_HOST
+            value: '10.0.0.35'       # mysql cluster-ip
+          - name: MYSQL_SERVICE_PORT
+            value: '3306'
