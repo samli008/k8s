@@ -25,3 +25,5 @@ spec:
             value: '10.0.0.35'       # mysql cluster-ip
           - name: MYSQL_SERVICE_PORT
             value: '3306'
+
+# access nodePort http://nodeIP:30008/demo
