@@ -1,0 +1,54 @@
+# install docker
+# curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+
+mkdir -p /data/docker
+mkdir -p /etc/docker
+cat > /etc/docker/daemon.json << EOF
+{
+  "graph": "/data/docker",
+  "storage-driver": "overlay2",
+  "insecure-registries": ["registry.access.redhat.com","quay.io","harbor.liyang.com"],
+  "registry-mirrors": ["https://q2gr04ke.mirror.aliyuncs.com"],
+  "bip": "172.7.21.1/24",
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "live-restore": true
+}
+EOF
+
+systemctl start docker
+
+https://github.com/goharbor/harbor/releases/tag/v1.8.5
+
+vi /opt/harbor/harbor.yml
+
+mkdir -p /data/harbor/logs
+
+yum install docker-compose -y
+
+sh /opt/harbor/install.sh
+
+docker-compose ps
+
+yum -y install nginx
+
+cat > /etc/nginx/conf.d/harbor.conf << EOF
+server {
+    listen       80;
+    server_name  harbor.liyang.com;
+
+    client_max_body_size 1000m;
+
+    location / {
+        proxy_pass http://127.0.0.1:180;
+    }
+}
+EOF
+
+systemctl enable nginx
+systemctl start nginx
+
+8.24上:
+# vi /var/named/liyang.com.zone
+harbor     A    192.168.8.24
+
+systemctl restart named
