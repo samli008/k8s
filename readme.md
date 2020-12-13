@@ -14,8 +14,9 @@
 * DaemonSet. Ensures that all or some worker nodes run a copy of a pod. This is useful for daemon applications like Fluentd.
 * Job. Creates one or more pods, runs a certain task(s) to completion, then deletes the pod(s).
 
+## Kubernetes architecture and components
 ![](./img/base.jpg)
----
+## Automatic service discovery
 ![](./img/svc.jpg)
----
+## Loadbalance service workload
 ![](./img/loadbalance.jpg)
