@@ -15,5 +15,7 @@
 * Job. Creates one or more pods, runs a certain task(s) to completion, then deletes the pod(s).
 
 ![](./img/base.jpg)
+---
 ![](./img/svc.jpg)
+---
 ![](./img/loadbalance.jpg)
