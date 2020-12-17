@@ -27,3 +27,4 @@ export ETCDCTL_API=3
 etcdctl get / --prefix --keys-only
 etcdctl get /registry/deployments/default --prefix --keys-only
 ```
+![](./img/k8s.jpg)
