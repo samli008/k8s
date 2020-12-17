@@ -8,7 +8,7 @@
 6. controller_manager_scheduler.yaml
 7. node.yaml
 8. sh label
-9. etcdctl mk /atomic.io/network/config '{ "Network": "10.10.0.0/16","SubnetLen": 24,"Backend": {"Type": "vxlan"} }'
+9. etcdctl mk /atomic.io/network/config '{ "Network": "10.10.0.0/16","SubnetLen": 24,"Backend": {"Type": "host-gw"} }'
 10. flannel.yaml; etcdctl ls /atomic.io/network/subnets
 11. sh flannel_docker
 12. load.yaml
