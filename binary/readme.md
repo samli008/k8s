@@ -1,3 +1,5 @@
+## deploy k8s
+```
 1. common.yaml
 2. docker.yaml
 3. etcd.yaml
@@ -24,3 +26,4 @@ kubectl get node
 export ETCDCTL_API=3
 etcdctl get / --prefix --keys-only
 etcdctl get /registry/deployments/default --prefix --keys-only
+```
