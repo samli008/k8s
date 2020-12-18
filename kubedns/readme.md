@@ -17,7 +17,7 @@ kubectl apply -f test_dns_pod.yaml
 kubectl exec busybox2 -it sh
 nslookup mysql
 ```
-## if k8s version > 15 
+## if k8s version => 1.16 
 ```
 sed -i 's|extensions/v1beta1|apps/v1|g' skydns-rc.yaml
 ```
