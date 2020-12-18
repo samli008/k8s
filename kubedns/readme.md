@@ -21,8 +21,3 @@ nslookup mysql
 ```
 sed -i 's|extensions/v1beta1|apps/v1|g' skydns-rc.yaml
 ```
-## testing with busybox container
-```
-kubectl exec -it busybox2 sh
-nslookup mysql
-```
