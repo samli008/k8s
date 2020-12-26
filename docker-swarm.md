@@ -20,6 +20,7 @@ docker node ls
 ```
 docker stack deploy -c nginx.yaml web
 docker service ls
+docker service scale liyang_nginx=4
 docker stack ls
 docker stack rm web
 ```
